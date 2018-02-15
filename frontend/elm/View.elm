@@ -15,21 +15,25 @@ view model =
             [ h1 [ class "header" ] [ text "Søk i enhetsregisteret" ]
 
             --, showScores 5 model
-            --, inputFieldName
+            , inputFieldOrgNumber
+
             --, inputFieldScore
             ]
         ]
 
 
+inputFieldOrgNumber : Html Msg
+inputFieldOrgNumber =
+    input
+        [ class "input"
+        , placeholder "Organisasjonsnummer"
+        , onInput UpdateOrgNumberInput
+        , onKeyDown KeyDownOrgNumber
+        ]
+        []
 
--- inputFieldScore : Html Msg
--- inputFieldScore =
---     input
---         [ class "input"
---         , placeholder "Organisasjonsnummer"
---         , onInput UpdateOrgNumberInput
---         ]
---         []
+
+
 -- inputFieldCompanyName : Html Msg
 -- inputFieldCompanyName =
 --     input
