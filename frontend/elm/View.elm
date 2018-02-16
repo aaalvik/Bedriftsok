@@ -4,21 +4,23 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Json.Decode as Json
-import Model exposing (Model)
+import Model exposing (Model, Unit)
 import Update exposing (Msg(..))
 
 
 view : Model -> Html Msg
 view model =
-    div [ class "container", style [ ( "margin-top", "30px" ), ( "text-align", "center" ) ] ]
+    div
+        [ class "container"
+        , style [ ( "height", "100vh" ), ( "backgroundImage", "url(\"static/bg.jpg\"" ) ]
+        ]
         [ div [ class "page" ]
             [ h1 [ class "header" ] [ text "Søk i enhetsregisteret" ]
-
-            --, showScores 5 model
             , inputFieldOrgNumber
 
-            --, inputFieldScore
+            --, viewUnits model
             ]
+        , viewTable model
         ]
 
 
@@ -48,6 +50,47 @@ inputFieldOrgNumber =
 onKeyDown : (Int -> msg) -> Attribute msg
 onKeyDown tagger =
     on "keydown" (Json.map tagger keyCode)
+
+
+viewTable : Model -> Html Msg
+viewTable model =
+    [ caption [] [ text "Tittel på tabellen" ]
+    , viewHeader
+    , viewTableBody model
+    ]
+        |> table [ class "table" ]
+
+
+viewTableBody : Model -> Html Msg
+viewTableBody model =
+    List.map viewRow model.currentUnits
+        |> tbody []
+
+
+viewRow : Unit -> Html Msg
+viewRow unit =
+    [ viewCell (toString unit.orgNumber)
+    , viewCell unit.name
+    ]
+        |> tr []
+
+
+viewHeader : Html Msg
+viewHeader =
+    [ viewHeaderCell "Organisasjonsnummer"
+    , viewHeaderCell "Navn"
+    ]
+        |> thead []
+
+
+viewCell : String -> Html Msg
+viewCell str =
+    td [] [ text str ]
+
+
+viewHeaderCell : String -> Html Msg
+viewHeaderCell str =
+    tr [] [ text str ]
 
 
 

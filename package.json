@@ -1,12 +1,12 @@
 {
-  "name": "leaderboard",
-  "description": "Live leaderboard for your activities",
+  "name": "bedriftsok",
+  "description": "Search Brønnøysundregisteret",
   "version": "0.8.6",
   "license": "MIT",
   "author": "Ragnhild Aalvik",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aaalvik/leaderboard"
+    "url": "https://github.com/aaalvik/bedriftsok"
   },
   "main": "server.js",
   "scripts": {
