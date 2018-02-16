@@ -10,7 +10,9 @@ type Msg
     = NoOp Int
     | ReceivedUnit (Result Http.Error Units)
     | UpdateOrgNumberInput String
+    | UpdateCompanyNameInput String
     | KeyDownOrgNumber Int
+    | KeyDownCompanyName Int
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -38,9 +40,22 @@ update msg model =
             in
             ( newModel, Cmd.none )
 
+        UpdateCompanyNameInput str ->
+            let
+                newModel =
+                    { model | companyName = str }
+            in
+            ( newModel, Cmd.none )
+
         KeyDownOrgNumber key ->
             if key == 13 then
                 updateByOrgNumber model
+            else
+                ( model, Cmd.none )
+
+        KeyDownCompanyName key ->
+            if key == 13 then
+                updateByCompanyName model
             else
                 ( model, Cmd.none )
 
@@ -54,6 +69,11 @@ updateByOrgNumber model =
 
         _ ->
             ( model, Cmd.none )
+
+
+updateByCompanyName : Model -> ( Model, Cmd Msg )
+updateByCompanyName model =
+    ( model, Cmd.none )
 
 
 

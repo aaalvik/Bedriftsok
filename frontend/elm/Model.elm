@@ -3,6 +3,7 @@ module Model exposing (..)
 
 type alias Model =
     { orgNumber : String
+    , companyName : String
     , currentUnits : List Unit
     }
 

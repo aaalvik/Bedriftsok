@@ -12,7 +12,7 @@ main =
 
 init : ( Model, Cmd Msg )
 init =
-    ( Model "" initUnits, Cmd.none )
+    ( Model "" "" initUnits, Cmd.none )
 
 
 initUnits =

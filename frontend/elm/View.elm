@@ -11,17 +11,22 @@ import Update exposing (Msg(..))
 view : Model -> Html Msg
 view model =
     div
-        [ class "container"
-        , style [ ( "height", "100vh" ), ( "backgroundImage", "url(\"static/bg.jpg\"" ) ]
-        ]
+        [ class "container" ]
         [ div [ class "page" ]
-            [ h1 [ class "header" ] [ text "Søk i enhetsregisteret" ]
-            , inputFieldOrgNumber
-
-            --, viewUnits model
+            [ h1 [ class "header" ]
+                [ text "Søk i enhetsregisteret" ]
+            , viewInputFields
             ]
         , viewTable model
         ]
+
+
+viewInputFields : Html Msg
+viewInputFields =
+    [ inputFieldOrgNumber
+    , inputFieldCompanyName
+    ]
+        |> div [ class "input-container" ]
 
 
 inputFieldOrgNumber : Html Msg
@@ -35,16 +40,15 @@ inputFieldOrgNumber =
         []
 
 
-
--- inputFieldCompanyName : Html Msg
--- inputFieldCompanyName =
---     input
---         [ class "input"
---         , placeholder "Navn på selskap"
---         , onInput UpdateCompanyNameInput
---         , onKeyDown KeyDownCompanyName
---         ]
---         []
+inputFieldCompanyName : Html Msg
+inputFieldCompanyName =
+    input
+        [ class "input"
+        , placeholder "Navn på selskap"
+        , onInput UpdateCompanyNameInput
+        , onKeyDown KeyDownCompanyName
+        ]
+        []
 
 
 onKeyDown : (Int -> msg) -> Attribute msg
@@ -54,8 +58,7 @@ onKeyDown tagger =
 
 viewTable : Model -> Html Msg
 viewTable model =
-    [ caption [] [ text "Tittel på tabellen" ]
-    , viewHeader
+    [ viewHeader
     , viewTableBody model
     ]
         |> table [ class "table" ]
@@ -77,10 +80,10 @@ viewRow unit =
 
 viewHeader : Html Msg
 viewHeader =
-    [ viewHeaderCell "Organisasjonsnummer"
-    , viewHeaderCell "Navn"
+    [ viewHeaderCell "ORGANISASJONSNUMMER"
+    , viewHeaderCell "NAVN"
     ]
-        |> thead []
+        |> thead [ class "table-header" ]
 
 
 viewCell : String -> Html Msg
@@ -90,18 +93,4 @@ viewCell str =
 
 viewHeaderCell : String -> Html Msg
 viewHeaderCell str =
-    tr [] [ text str ]
-
-
-
--- showScores : Int -> Model -> Html Msg
--- showScores num model =
---     let
---         top5 =
---             List.take num (List.sortBy .score model.scores)
---         makeScore name time =
---             div [ class "scores" ] [ div [ class "score-item" ] [ h1 [] [ text name ] ], div [ class "score-item" ] [ h1 [] [ text <| toString time ] ] ]
---         scores =
---             List.map (\{ name, score } -> makeScore name score) top5
---     in
---     div [ class "scores" ] scores
+    th [] [ text str ]
