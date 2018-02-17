@@ -41,7 +41,7 @@ bottom model =
 navigationButtons : Model -> Html Msg
 navigationButtons model =
     (if List.length model.currentUnits > 0 then
-        [ div [ class "page-number" ] [ text (toString (model.currentPage + 1)) ]
+        [ div [ class "page-number" ] [ text ("Side " ++ toString (model.currentPage + 1)) ]
         , a [ class "glyphicon glyphicon-chevron-left", onClick PreviousPage ] []
         , a [ class "glyphicon glyphicon-chevron-right", onClick NextPage ] []
         ]
