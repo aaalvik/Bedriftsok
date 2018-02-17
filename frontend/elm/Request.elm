@@ -13,7 +13,6 @@ maxPerPage =
 
 
 
---page=0&size=5"
 -- TEST ORG: 920440215
 
 
@@ -29,11 +28,6 @@ getUnitByOrgNumber orgNumber msg =
             Http.get url Decode.units
     in
     Http.send msg request
-
-
-
---$filter=startswith(navn,'Brønnøy')
---getUnitsByName : Int -> Cmd Msg
 
 
 getUnitsByName name pageNumber msg =

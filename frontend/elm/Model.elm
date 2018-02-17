@@ -29,6 +29,7 @@ type alias Unit =
     , name : String
     , organisationForm : String
     , unitAddress : Address
+    , bankrupt : Bool
 
     --, registerDate : String
     --, description : String

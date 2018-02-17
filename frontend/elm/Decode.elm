@@ -1,6 +1,6 @@
 module Decode exposing (..)
 
-import Json.Decode exposing (Decoder, field, int, list, string)
+import Json.Decode exposing (Decoder, field, int, list, map, string)
 import Json.Decode.Pipeline exposing (decode, required)
 import Model exposing (Address, Unit, Units)
 
@@ -20,6 +20,7 @@ unit =
         |> required "navn" string
         |> required "organisasjonsform" string
         |> required "forretningsadresse" address
+        |> required "konkurs" bankrupt
 
 
 address : Decoder Address
@@ -31,26 +32,19 @@ address =
         |> required "poststed" string
 
 
+bankrupt : Decoder Bool
+bankrupt =
+    let
+        toBool s =
+            case s of
+                "N" ->
+                    False
 
---|> required "orgform" orgForm
---|> required "institusjonellSektorkode" string
---|> required "registerDate" string
---|> required "description" string
--- JsonDecode.map6 Unit
---     (JsonDecode.field "organisasjonsnummer" JsonDecode.int)
---     (JsonDecode.field "name" JsonDecode.string)
+                _ ->
+                    True
+    in
+    map toBool string
 
 
 orgForm =
     string
-
-
-
--- scores : Decoder Model.Scores
--- scores =
---     JsonDecode.list score
--- score : Decoder Model.ScoreItem
--- score =
---     JsonDecode.map2 Model.ScoreItem
---         (JsonDecode.field "name" JsonDecode.string)
---         (JsonDecode.field "score" JsonDecode.float)

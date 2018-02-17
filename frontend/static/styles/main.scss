@@ -97,8 +97,8 @@ input:hover {
     width: 55px;
 }
 
-nav-buttons:focus {
-    outline: none;
+.nav-buttons a {
+    text-decoration: none;
 }
 
 .page-number {
@@ -114,4 +114,8 @@ nav-buttons:focus {
 
 .input-item a {
     text-decoration: none;
+}
+
+.bankrupt {
+    background-color: $red-bankrupt;
 }
