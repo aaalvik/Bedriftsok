@@ -8,9 +8,12 @@ globalUrl =
     "http://data.brreg.no/enhetsregisteret/enhet.json?"
 
 
+maxPerPage =
+    "6"
+
+
 
 --page=0&size=5"
---getUnitByOrgNumber : Int -> Cmd msg
 -- TEST ORG: 920440215
 
 
@@ -20,7 +23,7 @@ getUnitByOrgNumber orgNumber msg =
             "&$filter=organisasjonsnummer eq '" ++ toString orgNumber ++ "'"
 
         url =
-            globalUrl ++ "page=0&size=5" ++ urlFilter
+            globalUrl ++ "page=0&size=" ++ maxPerPage ++ urlFilter
 
         request =
             Http.get url Decode.units
@@ -29,21 +32,19 @@ getUnitByOrgNumber orgNumber msg =
 
 
 
--- getUnits : Int -> Cmd Msg
--- getUnits pageNumber =
---     let
---         url =
---             globalUrl ++ "page=" ++ toString pageNumber ++ "&size=5"
---         request =
---             Http.get url Decode.units
---     in
---     Http.send ReceivedUnits request
--- getScores : Cmd Msg
--- getScores =
---     let
---         url =
---             globalUrl ++ "/scores"
---         request =
---             Http.get url Decode.scores
---     in
---     Http.send ReceivedScores request
+--$filter=startswith(navn,'Brønnøy')
+--getUnitsByName : Int -> Cmd Msg
+
+
+getUnitsByName name pageNumber msg =
+    let
+        urlFilter =
+            "&$filter=startswith(navn,'" ++ name ++ "')"
+
+        url =
+            globalUrl ++ "page=" ++ toString pageNumber ++ "&size=" ++ maxPerPage ++ urlFilter
+
+        request =
+            Http.get url Decode.units
+    in
+    Http.send msg request

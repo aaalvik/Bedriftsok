@@ -8,11 +8,15 @@ import Validation
 
 type Msg
     = NoOp Int
-    | ReceivedUnit (Result Http.Error Units)
+    | ReceivedUnits (Result Http.Error Units)
     | UpdateOrgNumberInput String
     | UpdateCompanyNameInput String
     | KeyDownOrgNumber Int
     | KeyDownCompanyName Int
+    | NextPage
+    | PreviousPage
+    | OrgNumberButtonClicked
+    | CompanyNameButtonClicked
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -21,17 +25,17 @@ update msg model =
         NoOp _ ->
             ( model, Cmd.none )
 
-        ReceivedUnit result ->
+        ReceivedUnits result ->
             case result of
                 Ok unitObject ->
                     let
                         newModel =
                             { model | currentUnits = unitObject.units }
                     in
-                    Debug.log ("Received unit: " ++ toString unitObject) ( newModel, Cmd.none )
+                    Debug.log ("Received units: " ++ toString unitObject) ( newModel, Cmd.none )
 
                 Err str ->
-                    Debug.log ("Tried to get unit by orgNumber, but got: " ++ toString str) ( model, Cmd.none )
+                    Debug.log ("Tried to get units, but got: " ++ toString str) ( model, Cmd.none )
 
         UpdateOrgNumberInput str ->
             let
@@ -59,13 +63,28 @@ update msg model =
             else
                 ( model, Cmd.none )
 
+        OrgNumberButtonClicked ->
+            updateByOrgNumber model
+
+        CompanyNameButtonClicked ->
+            updateByCompanyName model
+
+        NextPage ->
+            stepOnePage model ((+) 1)
+
+        PreviousPage ->
+            if model.currentPage == 0 then
+                ( model, Cmd.none )
+            else
+                stepOnePage model (\n -> n - 1)
+
 
 updateByOrgNumber : Model -> ( Model, Cmd Msg )
 updateByOrgNumber model =
     case Validation.validOrgNumber model.orgNumber of
         ( True, num ) ->
             -- TODO: make call to API
-            ( model, Request.getUnitByOrgNumber num ReceivedUnit )
+            ( { model | currentPage = 0 }, Request.getUnitByOrgNumber num ReceivedUnits )
 
         _ ->
             ( model, Cmd.none )
@@ -73,7 +92,19 @@ updateByOrgNumber model =
 
 updateByCompanyName : Model -> ( Model, Cmd Msg )
 updateByCompanyName model =
-    ( model, Cmd.none )
+    ( { model | currentPage = 0 }, Request.getUnitsByName model.companyName 0 ReceivedUnits )
+
+
+stepOnePage : Model -> (Int -> Int) -> ( Model, Cmd Msg )
+stepOnePage model incOrDec =
+    let
+        curPage =
+            model.currentPage
+
+        newModel =
+            { model | currentPage = incOrDec curPage }
+    in
+    Debug.log ("pageBefore: " ++ toString curPage ++ ", updated: " ++ (toString <| incOrDec curPage)) ( newModel, Request.getUnitsByName model.companyName (incOrDec curPage) ReceivedUnits )
 
 
 

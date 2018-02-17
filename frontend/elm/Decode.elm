@@ -2,7 +2,7 @@ module Decode exposing (..)
 
 import Json.Decode exposing (Decoder, field, int, list, string)
 import Json.Decode.Pipeline exposing (decode, required)
-import Model exposing (Unit, Units)
+import Model exposing (Address, Unit, Units)
 
 
 units : Decoder Units
@@ -18,6 +18,17 @@ unit =
         Unit
         |> required "organisasjonsnummer" int
         |> required "navn" string
+        |> required "organisasjonsform" string
+        |> required "forretningsadresse" address
+
+
+address : Decoder Address
+address =
+    decode
+        Address
+        |> required "adresse" string
+        |> required "postnummer" string
+        |> required "poststed" string
 
 
 

@@ -5,6 +5,7 @@ type alias Model =
     { orgNumber : String
     , companyName : String
     , currentUnits : List Unit
+    , currentPage : Int
     }
 
 
@@ -16,12 +17,19 @@ type alias Units =
     { units : List Unit }
 
 
+type alias Address =
+    { address : String
+    , postalNumber : String
+    , postal : String
+    }
+
+
 type alias Unit =
     { orgNumber : Int
     , name : String
+    , organisationForm : String
+    , unitAddress : Address
 
-    --, organisationForm : String
-    --, address : String
     --, registerDate : String
     --, description : String
     }

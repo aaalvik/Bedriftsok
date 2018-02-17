@@ -12,8 +12,9 @@ main =
 
 init : ( Model, Cmd Msg )
 init =
-    ( Model "" "" initUnits, Cmd.none )
+    ( Model "" "" [] 0, Cmd.none )
 
 
-initUnits =
-    [ Unit 1 "Test1", Unit 2 "Test2" ]
+
+-- initUnits =
+--     [ Unit 1 "Test1", Unit 2 "Test2" ]
