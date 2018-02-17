@@ -42,14 +42,20 @@ update msg model =
                 newModel =
                     { model | orgNumber = str }
             in
-            ( newModel, Cmd.none )
+            if String.length str >= 3 then
+                updateByOrgNumber newModel
+            else
+                ( newModel, Cmd.none )
 
         UpdateCompanyNameInput str ->
             let
                 newModel =
                     { model | companyName = str }
             in
-            ( newModel, Cmd.none )
+            if String.length str >= 3 then
+                updateByCompanyName newModel
+            else
+                ( newModel, Cmd.none )
 
         KeyDownOrgNumber key ->
             if key == 13 then

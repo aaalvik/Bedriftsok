@@ -14,4 +14,4 @@ organisationForm key =
             val
 
         Nothing ->
-            ""
+            key

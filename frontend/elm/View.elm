@@ -13,14 +13,30 @@ view : Model -> Html Msg
 view model =
     div
         [ class "container" ]
-        [ div [ class "page" ]
-            [ h1 [ class "header" ]
-                [ text "Søk i Brønnøysundregistrene" ]
-            , viewInputFields
-            ]
-        , viewTable model
+        [ viewTop
+        , viewBottom model
+        ]
+
+
+viewTop : Html Msg
+viewTop =
+    [ h1 [ class "header" ]
+        [ text "Søk i Brønnøysundregistrene" ]
+    , viewInputFields
+    ]
+        |> div [ class "page-top" ]
+
+
+viewBottom : Model -> Html Msg
+viewBottom model =
+    (if List.length model.currentUnits == 0 then
+        []
+     else
+        [ viewTable model
         , viewNavigationButtons model
         ]
+    )
+        |> div [ class "page-bottom" ]
 
 
 viewInputFields : Html Msg
@@ -30,7 +46,7 @@ viewInputFields =
       ]
         |> div [ class "input-item" ]
     , [ inputFieldCompanyName
-      , a [ class "glyphicon glyphicon-search", onClick OrgNumberButtonClicked ] []
+      , a [ class "glyphicon glyphicon-search", onClick CompanyNameButtonClicked ] []
       ]
         |> div [ class "input-item" ]
     ]
@@ -62,7 +78,7 @@ inputFieldCompanyName =
 viewNavigationButtons : Model -> Html Msg
 viewNavigationButtons model =
     (if List.length model.currentUnits > 0 then
-        [ div [ class "page-number" ] [ text (toString model.currentPage) ]
+        [ div [ class "page-number" ] [ text (toString (model.currentPage + 1)) ]
         , span [ class "glyphicon glyphicon-chevron-left", onClick PreviousPage ] []
         , span [ class "glyphicon glyphicon-chevron-right", onClick NextPage ] []
         ]

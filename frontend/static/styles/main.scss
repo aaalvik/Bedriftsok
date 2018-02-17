@@ -17,7 +17,7 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
     line-height: 1.875;
 }
 
-.page {
+.page-top {
     display: flex;
     flex-direction: column;
     align-items: left;
@@ -26,7 +26,13 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
     background-color: white;
 }
 
+.page-bottom {
+    display: flex;
+    flex-direction: column;
+}
+
 .table {
+    width: 100%;
     margin-top: 4rem;
     background-color: white;
     text-align: left;
@@ -62,7 +68,7 @@ input:hover {
 }
 
 .header {
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
     font-weight: 150;
 }
 
@@ -83,7 +89,6 @@ input:hover {
     font-weight: 300;
     text-align: left;
 }
-
 
 .nav-buttons {
     display: flex;
