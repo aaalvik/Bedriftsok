@@ -8,7 +8,7 @@ Utfør søk til Brønnøysundregisteret basert på enten organisasjonsnummer ell
 ![startside](https://raw.githubusercontent.com/aaalvik/bedriftsok/master/frontend/static/screenshots/start-view.png)
 
 #### Resultater etter søk basert på organisasjonsnummer:
-![orgnummer](https://raw.githubusercontent.com/aaalvik/bedriftsok/master/frontend/static/screenshots/orgnummer-view.png)
+![orgnummer](https://raw.githubusercontent.com/aaalvik/bedriftsok/master/frontend/static/screenshots/orgnummer.png)
 
 #### Resultater etter søk på navn (bedrifter i rødt er konkurs):
 ![bedriftsnavn](https://raw.githubusercontent.com/aaalvik/bedriftsok/master/frontend/static/screenshots/bankrupt-view.png)
