@@ -1,22 +1,26 @@
-# Live leaderboard
+# Søk i Brønnøydundregisteret
 
 
-### About:
-Live leaderboard for your own competitions or games. 
+### Om:
+Utfør søk til Brønnøysundregisteret basert på enten organisasjonsnummer eller navn på bedriften. Støtter inkrementelt søk etter minst 3 bokstaver. 
 
-You can choose how many positions to display, what unit the scores are in, and whether the lowest or highest score wins. Type the name and score of a participant and hit enter, and he will be placed in his correct position.
+#### Startside:
+![startside](https://raw.githubusercontent.com/aaalvik/bedriftsok/master/frontend/static/screenshots/start-view.png)
+
+#### Resultater etter søk basert på organisasjonsnummer:
+![orgnummer](https://raw.githubusercontent.com/aaalvik/bedriftsok/master/frontend/static/screenshots/orgnummer-view.png)
+
+#### Resultater etter søk på navn (bedrifter i rødt er konkurs):
+![bedriftsnavn](https://raw.githubusercontent.com/aaalvik/bedriftsok/master/frontend/static/screenshots/bankrupt-view.png)
 
 
-### Install:
-1. Install elm (https://guide.elm-lang.org/install.html)
-2. Install node (https://nodejs.org/en/download/)
-3. Run ```npm install```
+### Installasjon:
+1. Installer elm (https://guide.elm-lang.org/install.html)
+2. Installer node (https://nodejs.org/en/download/)
+3. Kjør ```npm install```
 
-### Run: 
-1. Start the elm app:
+### Kjøring: 
+1. Start elm appen:
 ```npm start```
 
-2. Start the server: 
-```node server.js```
-
-3. Go to localhost:8080 and you're all set!
+2. Gå til localhost:8080 og du er inne!
